@@ -1,0 +1,215 @@
+import java.util.*;
+import java.lang.*;
+
+class Node
+{
+    public int data;
+    public Node next;
+    Node(int d)
+    {
+        data=d;
+        next=null;
+    }
+}
+class LinkedList
+{
+    Node head;
+    Node last;
+    Node temp;
+    
+    LinkedList()
+    {
+        head=last=null;
+    }
+    void inserList(int d)
+    {
+        Node temp=new Node(d);
+        if (head==null)
+        {
+            head=last=temp;
+        }
+        else
+        {   
+            last.next=temp;
+            last=temp;
+        }
+    }
+    
+    int countNode()
+    {
+        int c=0;
+        if(head==null)
+        {
+            System.out.println("Empty list");
+            
+        }
+        else
+        {
+            temp=head;
+            while(temp!=null)
+            {
+                c++;
+                temp=temp.next;
+            }
+        }
+        return c;
+    }
+    
+    void dispmid()
+    {
+        int mid=(countNode()/2)+1;
+        if(head==null)
+        {
+            System.out.println("Empty list");
+            return;
+        }
+        else
+        {
+            temp=head;
+            int pos=0;
+            while(temp!=null && pos!=mid-1)
+            {
+                temp=temp.next;
+                pos++;
+            }
+            System.out.println("Position = "+pos);
+            Node temp2;
+            temp2=temp;
+            while(temp2!=null)
+            {
+                System.out.print(temp2.data+" -> ");
+                temp2=temp2.next;
+            }
+            
+        }
+    }
+    
+    void deletePOS(int p)
+    {
+        int size=countNode();
+        Node prev;
+        Node curr;
+        if(head==null)
+        {
+            System.out.println("Empty");
+        }
+        
+        else
+        {
+            int pos=1;
+            temp=head;
+            prev=head;
+            curr=head;
+            while(pos<p)
+            {
+                prev=curr;
+                curr=curr.next;
+                pos++;
+            }
+            if(p==size)
+            {
+                prev.next=null;
+                last=prev;
+            }
+            if(p==1)
+            {
+                head=head.next;
+                
+            }
+            else if(curr.next==null)
+            {
+                System.out.println("no possible");
+            }
+            else{
+                prev.next=curr.next;
+            }
+            
+        }
+    }
+    
+    void InsertEND(int d)
+    {
+        Node temp=new Node(d);
+         if(head==null)
+         {
+             head=last=temp;
+         }
+         else
+         {
+             last.next=temp;
+             last=temp;
+         }
+    }
+    
+    void InsertFIRST(int d)
+    {
+        Node temp=new Node(d);
+        if(head==null)
+        {
+            head=last=temp;
+        }
+        else
+        {
+            temp.next=head;
+            head=temp;
+            
+        }
+    }
+    
+    void display()
+    {
+        if(head==null)
+        {
+            System.out.println("Empty list");
+            return;
+        }
+        else
+        {
+            temp=head;
+            while(temp!=null)
+            {
+                System.out.print(temp.data+" -> ");
+                temp=temp.next;
+            }
+        }
+    }
+    
+}
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    
+	    LinkedList l = new LinkedList();
+	    Scanner sc=new Scanner(System.in);
+	    
+		while(true)
+		{
+		    System.out.println("List Size ="+l.countNode());
+		System.out.println("1.Insert List \n2.Display \n3. DispMIDlist");
+		System.out.println("\n4.InsertFIRST \n5.InsertEND \n6.DeletePOS \n7.Exit");
+		int ch=sc.nextInt();
+		int item;
+		switch(ch)
+		{
+		    case 1:  item=sc.nextInt();
+		        l.inserList(item);
+		        
+		        break;
+		    case 2: l.display(); 
+		            break;
+		    case 3: l.dispmid(); break;
+		    case 4: item=sc.nextInt();
+		            l.InsertFIRST(item); break;
+		    case 5: item=sc.nextInt();
+		            l.InsertEND(item); break;
+		    case 6: item=sc.nextInt();
+		            l.deletePOS(item); break;
+		  
+		    case 7: 
+		        System.exit(0);
+		}
+		
+		}
+	}
+}
